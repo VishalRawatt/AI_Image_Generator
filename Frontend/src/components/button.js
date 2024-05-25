@@ -79,4 +79,4 @@ const button = ({
   );
 };
 
-export default Button;
+export default button;

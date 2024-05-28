@@ -60,6 +60,11 @@ const CardWrapper = styled.div`
 `;
 
 const Home = () => {
+  const item = {
+    photo: "https://th.bing.com/th/id/OIP.1d6tBbNiJTFQNEK_k0sSjQHaFj?rs=1&pid=ImgDetMain",
+    author: "Vishal",
+    prompt: "Its a prompt",
+  }
   return (
     <Container>
       <Headline>Explore popular posts in the community!
@@ -68,11 +73,16 @@ const Home = () => {
       <SearchBar />
       <Wrapper>
         <CardWrapper>
-          <ImgCard/>
-          <ImgCard/>
-          <ImgCard/>
-          <ImgCard/>
-          <ImgCard/>
+          <ImgCard item={item} />
+          <ImgCard item={item} />
+          <ImgCard item={item} />
+          <ImgCard item={item} />
+          <ImgCard item={item} />
+          <ImgCard item={item} />
+          <ImgCard item={item} />
+          <ImgCard item={item} />
+          <ImgCard item={item} />
+          <ImgCard item={item} />
         </CardWrapper>
       </Wrapper>
     </Container>

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { Avatar } from '@mui/material';
 import DownloadForOfflineRoundedIcon from '@mui/icons-material/DownloadForOfflineRounded';
-import { FileSaver } from 'file-saver';
+import FileSaver from 'file-saver';
 
 const Card = styled.div`
   position: relative;
@@ -65,7 +65,8 @@ const Author = styled.div`
 const ImgCard = ({item}) => {
   return (
     <Card>
-        <LazyLoadImage 
+        <LazyLoadImage
+        style={{borderRadius: '12px'}}
         width="100%" 
         src = {item?.photo}/>
         <HoverOverlay>

@@ -15,7 +15,6 @@ const Container = styled.div`
   overflow-y: hidden;
   transition: all 0.2s ease;
 `;
-//Wrapper
 
 const Wrapper = styled.div`
   height: 100%;
@@ -38,7 +37,6 @@ function App() {
             <Route path='/post' element={<CreatePost/>} exact></Route>
           </Routes>
           </BrowserRouter>
-          <CreatePost/>
         </Wrapper>
       </Container>
      </ThemeProvider>

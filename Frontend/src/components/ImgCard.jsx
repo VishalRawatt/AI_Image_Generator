@@ -1,13 +1,88 @@
 import React from 'react'
 import styled from 'styled-components';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
+import { Avatar } from '@mui/material';
+import DownloadForOfflineRoundedIcon from '@mui/icons-material/DownloadForOfflineRounded';
+import { FileSaver } from 'file-saver';
 
+const Card = styled.div`
+  position: relative;
+  display: flex;
+  background: ${({ theme }) => theme.card};
+  border-radius: 20px;
+  box-shadow: 1px 2px 40px 8px ${({ theme }) => theme.black + 60};
+  gap: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  &:hover {
+    box-shadow: 1px 2px 40px 8px ${({ theme }) => theme.black + 80};
+    scale: 1.05;
+  }
+  &:nth-child(7n + 1) {
+    grid-column: auto/span 2;
+    grid-row: auto/span 2;
+  }
+`;
 
-const Card = styled.div`` ; 
-const ImgCard = () => {
+const HoverOverlay = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: start;
+  gap: 2px;
+  justify-content: end;
+  flex-direction: column;
+  backdrop-filter: blur(2px);
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 6px;
+  opacity: 0;
+  padding: 16px;
+  transition: opacity 0.3s ease;
+  color: ${({ theme }) => theme.white};
+
+  ${Card}:hover & {
+    opacity: 1;
+  }
+`;
+
+const Prompt = styled.div`
+  font-weight: 400;
+  font-size: 15px;
+  color: ${({ theme }) => theme.white};
+`;
+const Author = styled.div`
+  font-weight: 600;
+  font-size: 14px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  color: ${({ theme }) => theme.white};
+`;
+
+const ImgCard = ({item}) => {
   return (
     <Card>
-        <LazyLoadImage src = "https://imgs.search.brave.com/BrFuuUENt1_DOqlE9gpVvobbQe7drdmoureILpXGTlI/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9iZWlu/Y3J5cHRvLmNvbS93/cC1jb250ZW50L3Vw/bG9hZHMvMjAyMi8x/MS9BSS1pbWFnZS1n/ZW5lcmF0b3Itd2hh/dGlzLTg1MHg0Nzgu/anBnLndlYnA"/>
+        <LazyLoadImage 
+        width="100%" 
+        src = {item?.photo}/>
+        <HoverOverlay>
+          <Prompt>{item?.prompt}</Prompt>
+          <div style={{
+            width: '100%',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+          }}>
+          <Author>
+            <Avatar style={{width:"32px", height:"32px"}}>{item?.author[0]}</Avatar>
+            {item?.author}
+            </Author>
+            <DownloadForOfflineRoundedIcon onClick={()=>FileSaver.saveAs(item?.photo,"download.jpg")} />
+          </div>
+        </HoverOverlay>
     </Card>
   )
 }

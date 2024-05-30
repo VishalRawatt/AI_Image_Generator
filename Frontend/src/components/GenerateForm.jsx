@@ -47,34 +47,65 @@ const Actions = styled.div`
   gap: 8px;
 `;
 
-const GenerateForm = () => {
-    return (
-        <Form>
-            <Top>
-                <Title>Generate Image with prompt</Title>
-                <Desc>Write your prompt </Desc>
-            </Top>
-            <Body>
-                <TextInput
-                    label="Author"
-                    placeholder="Enter your name..."
-                    name="name"
-                />
-                <TextInput
-                    label="Image Prompt"
-                    placeholder="Write your detailed prompt..."
-                    name="prompt"
-                    rows="8"
-                    textArea
-                />
-                ** You can post the AI Generated Image to the community **
-            </Body>
-            <Actions>
-                <Button text="Generate Image" flex leftIcon={<AutoAwesomeIcon />} />
-                <Button text="Post Image" type="secondary" flex leftIcon={<CreateIcon />} />
-            </Actions>
-        </Form>
-    )
+const GenerateForm = ({
+  post,
+  setPost,
+  createPostLoading,
+  setGenerateImageLoading,
+  generateImageLoading,
+  setCreatePostLoading,
+}) => {
+const generateImageFun = () =>{
+  setGenerateImageLoading(true);
+};
+const createImageFun = () =>{
+  setCreatePostLoading(true);
+}
+  return (
+    <Form>
+      <Top>
+        <Title>Generate Image with prompt</Title>
+        <Desc>Write your prompt </Desc>
+      </Top>
+      <Body>
+        <TextInput
+          label="Author"
+          placeholder="Enter your name..."
+          name="name"
+          value={post.name}
+          handelChange={(e)=>setPost({...post, prompt:e.target.value})}
+        />
+        <TextInput
+          label="Image Prompt"
+          placeholder="Write your detailed prompt..."
+          name="prompt"
+          rows="8"
+          textArea
+          value={post.prompt}
+          handelChange={(e)=>setPost({...post, prompt:e.target.value})}
+        />
+        ** You can post the AI Generated Image to the community **
+      </Body>
+      <Actions>
+        <Button text="Generate Image" 
+        flex
+        leftIcon={<AutoAwesomeIcon />}
+        isLoading={generateImageLoading}
+        isDisabled={post.prompt === ""} 
+        onClick={()=>generateImageFun()}
+         />
+        <Button 
+        text="Post Image" 
+        type="secondary" 
+        flex 
+        leftIcon={<CreateIcon />} 
+        isLoading={createPostLoading}
+        isDisabled={post.name === "" || post.prompt === "" || post.photo === "" } 
+        onClick={()=>createImageFun()}
+        />
+      </Actions>
+    </Form>
+  )
 }
 
 export default GenerateForm

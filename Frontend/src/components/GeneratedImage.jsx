@@ -13,6 +13,7 @@ const Container = styled.div`
     border: 2px dashed ${({ theme }) => theme.yellow} ;
     color: ${({ theme }) => theme.arrow + 80} ;
     border-radius: 20px; 
+    min-height: 300px;
 `
 
 const Image = styled.div`
